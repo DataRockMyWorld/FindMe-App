@@ -1,0 +1,98 @@
+{% extends '../base.html' %}
+
+{% block content %}
+<div class="container-fluid py-5">
+    <!-- Dashboard Heading -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Welcome back, {{ user.get_full_name|default:user.username }}!</h2>
+    </div>
+
+    <!-- Dashboard Content -->
+    <div class="row">
+        <!-- My Items Section -->
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h4>My Items</h4>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        {% for item in user_items %}
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            {{ item.title }}
+                            <span>
+                                <a href="{% url 'edit_item' item.id %}" class="btn btn-outline-secondary btn-sm">Edit</a>
+                                <a href="{% url 'item-delete' item.id %}" class="btn btn-outline-danger btn-sm">Delete</a>
+                            </span>
+                        </li>
+                        {% empty %}
+                        <li class="list-group-item">You have not listed any items yet.</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+  <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-header bg-warning text-white">
+                    <h4>Incoming Claims</h4>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        {% for claim in incoming_claims %}
+                        <li class="list-group-item">
+                            <strong>{{ claim.item.title }}</strong> by <em>{{ claim.claimant.username }}</em>
+                            <div class="mt-2 d-flex justify-content-between align-items-center">
+                                <div>
+                                    <!-- Approve and Reject Forms -->
+                                    <form method="post" action="{% url 'approve_claim' claim.id %}" class="d-inline">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-success btn-sm">Approve</button>
+                                    </form>
+                                    <form method="post" action="{% url 'reject_claim' claim.id %}" class="d-inline">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-danger btn-sm">Reject</button>
+                                    </form>
+                                </div>
+                                <a href="{% url 'message_user' claim.claimant.id %}" class="btn btn-info btn-sm">
+                                    <i class="fas fa-envelope"></i> Message
+                                </a>
+                            </div>
+                        </li>
+                        {% empty %}
+                        <li class="list-group-item">No incoming claims.</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Claim History Section -->
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-header bg-secondary text-white">
+                    <h4>Claim History</h4>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        {% for history in claim_history %}
+                        <li class="list-group-item">
+                            <strong>{{ history.item.title }}</strong> claimed by <em>{{ history.claimant.username }}</em>
+                            <strong>Status:</strong> {{ history.status|title }}
+                            <span class="text-muted float-right">{{ history.modified_at|date:"M d, Y H:i" }}</span>
+                        </li>
+                        {% empty %}
+                        <li class="list-group-item">No claim history found.</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+
+

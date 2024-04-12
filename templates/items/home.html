@@ -1,0 +1,66 @@
+{% extends '../base.html' %}
+
+{% block content %}
+
+<!-- Hero Section with Search Bar -->
+<section class="hero-section text-center bg-light py-5">
+    <div class="container">
+        <h1 class="display-4">Welcome to Find Me!</h1>
+        <p class="lead">A convenient way to report and search for lost and found items.</p>
+        <div class="search-bar my-4">
+            <form method="get" action="{% url 'item-list' %}">
+                <div class="input-group input-group-lg">
+                    <input type="text" class="form-control" placeholder="Search for items, e.g., 'wallet', 'phone'" name="q" aria-label="Search items" value="{{ request.GET.q }}">
+                    <div class="input-group-append">
+                        <button class="btn btn-info" type="submit"><i class="fas fa-search"></i> Search</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="mt-4">
+            <a href="{% url 'item-list' %}" class="btn btn-outline-info btn-lg">Explore Advanced Search Options</a>
+        </div>
+    </div>
+</section>
+
+<!-- Main Content -->
+<main class="container my-5">
+    <!-- Action Buttons -->
+    <div class="text-center mb-5">
+        <a href="{% url 'lost_items' %}" class="btn btn-primary me-2">Lost Items</a>
+        <a href="{% url 'found_items' %}" class="btn btn-secondary ms-2">Found Items</a>
+    </div>
+
+    <!-- Item Cards Grid -->
+    {% if items %}
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for item in items %}
+        <div class="col">
+            <div class="card h-100">
+                {% if item.image %}
+                <img src="{{ item.image.url }}" class="card-img-top" alt="{{ item.title }}">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ item.title }}</h5>
+                    <p class="card-text">{{ item.description|truncatewords:20 }}</p>
+                </div>
+                <div class="card-footer text-muted">
+                    Category: {{ item.category.name }}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="alert alert-info" role="alert">
+        No items found. Try adjusting your search or check out lost and found items.
+    </div>
+    {% endif %}
+</main>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://kit.fontawesome.com/your-fontawesome-kit.js"></script>
+{% endblock %}
+
+
