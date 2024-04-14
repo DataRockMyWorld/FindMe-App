@@ -48,9 +48,9 @@
           <a class="nav-link" href="{% url 'conversation_list' %}">
             <i class="fas fa-envelope"></i>
             {% if messages_count %}
-            <span class="badge badge-danger">{{ messages_count }}</span>
+            <span class="badge bg-danger">{{ messages_count }}</span>
             {% else %}
-            <span class="badge badge-light">0</span>
+            <span class="badge bg-danger">0</span>
             {% endif %}
           </a>
         </li>
