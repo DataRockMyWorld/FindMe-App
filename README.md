@@ -30,16 +30,19 @@ Find Me is a web application designed to help users report and search for lost o
 
 
 2. **Set Up a Virtual Environment**
-   
-  python -m venv venv
-  source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows use `venv\Scripts\activate`
 
 3. **Install Dependencies**
 
+  ```bash
   pip install -r requirements.txt
 
 4. **Initialize Database**
 
+   ```bash
   python manage.py migrate
 
 5. **Create a superuser**
