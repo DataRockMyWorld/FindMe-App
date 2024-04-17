@@ -37,21 +37,23 @@ Find Me is a web application designed to help users report and search for lost o
 
 3. **Install Dependencies**
 
-  ```bash
-  pip install -r requirements.txt
+   ```bash
+   pip install -r requirements.txt
 
 4. **Initialize Database**
 
    ```bash
-  python manage.py migrate
+   python manage.py migrate
 
 5. **Create a superuser**
 
-  python manage.py createsuperuser
+   ```bash
+   python manage.py createsuperuser
 
 6. **Run the server**
 
-  python manage.py runserver
+   ```bash
+   python manage.py runserver
 
 
 ### Usage
