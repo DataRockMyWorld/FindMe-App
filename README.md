@@ -68,14 +68,14 @@ Create a new branch for each feature or improvement.
 Send a pull request from each feature branch to the develop branch.
 
 
-##Authors
+Authors
 
 - **Jewel Bansah**
 - **Kwabena Amoakwa**
 - **Jeffrey Karikari**
 
 
-##License
+License
 
 This project is licensed under the MIT License - see the LICENSE.md file for details.
 
