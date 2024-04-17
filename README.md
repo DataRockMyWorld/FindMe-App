@@ -70,9 +70,9 @@ Send a pull request from each feature branch to the develop branch.
 
 ##Authors
 
-Jewel Bansah
-Kwabena Amoakwa
-Jeffrey Karikari
+- **Jewel Bansah**
+- **Kwabena Amoakwa**
+- **Jeffrey Karikari**
 
 
 ##License
